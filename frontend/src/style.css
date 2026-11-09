@@ -1,0 +1,63 @@
+/* Keep the client-provided visual design; only add application-state styles. */
+.boot-state { max-width: 600px; margin: 20vh auto; padding: 32px; text-align: center; display: grid; gap: 18px; }
+.boot-state p { color: #778499; }
+.auth-result { margin: 0 0 20px; padding: 14px 16px; font-size: 13px; color: #2457a8; }
+.auth-submit:disabled { cursor: wait; }
+.error { overflow-wrap: anywhere; }
+button:focus-visible { outline: 2px solid #2457ff; outline-offset: 3px; }
+.mexico-main { overflow-wrap: anywhere; }
+.mexico-scope { align-items: center; }
+.mexico-scope p { margin-top: 8px; }
+.page-size-label { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: #778499; }
+.toolbar .page-size-label select { width: 90px; }
+.mexico-lead { display: flex; flex-direction: column; }
+.lead-name { text-align: left; overflow-wrap: anywhere; }
+.mexico-lead .supplier-title { margin-bottom: 5px; }
+.mexico-lead .supplier-title .tag { flex-shrink: 0; }
+.mexico-lead .supplier-foot { margin-top: auto; }
+.mexico-lead .supplier-meta { margin-bottom: 18px; }
+.lead-description { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; overflow-wrap: anywhere; }
+.lead-quantity { margin-top: 10px; }
+.data-loading { padding: 60px 20px; text-align: center; color: #778499; background: #f8faff; border-radius: 10px; }
+.data-error { padding: 24px; border: 1px solid #f0c9ce; border-radius: 10px; background: #fff7f8; color: #9a2b39; }
+.data-error p { margin: 10px 0 18px; }
+.mexico-table { min-width: 880px; table-layout: fixed; }
+.mexico-table th:first-child { width: 25%; }
+.mexico-table th:nth-child(2) { width: 32%; }
+.mexico-table th:nth-child(3) { width: 15%; }
+.mexico-table th:nth-child(4) { width: 13%; }
+.mexico-table .table-name { white-space: normal; }
+.lead-detail-name { font-size: 24px; margin: 8px 0; overflow-wrap: anywhere; }
+.lead-info { margin: 0; }
+.lead-info dd { margin: 7px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.goods-original { background: #f7f9fd; padding: 18px; border-radius: 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.search-validation { margin: 10px 0; }
+.search-form { display: grid; grid-template-columns: 1.5fr .85fr 1fr auto; align-items: end; gap: 12px; }
+.search-channels { margin-top: 24px; overflow-x: auto; }
+.search-channels button { white-space: nowrap; }
+.search-toolbar .row { justify-content: flex-end; }
+.search-toolbar select { width: 170px; }
+.company-search-form { display: flex; gap: 6px; width: 290px; }
+.company-search-form input { flex: 1; min-width: 0; }
+.company-search-form button { flex-shrink: 0; }
+.lead-source { margin: 10px 0 16px; }
+.match-basis { margin-top: 12px; }
+.search-scope p + p { margin-top: 4px; }
+.channel-placeholder p { margin-top: 10px; }
+.channel-placeholder button { margin-top: 20px; }
+.filter-dot { color: #2457ff; }
+.mexico-lead .heart { color: #aab3c4; font-size: 22px; border: 0; background: transparent; padding: 0; }
+.legacy-notice { max-width: 1600px; margin: 0 auto 12px; padding: 12px 18px; border: 1px solid #f1dfb9; background: #fff9ed; color: #806020; border-radius: 10px; font-size: 13px; }
+@media (max-width: 760px) {
+  .search-form { grid-template-columns: 1fr; }
+  .search-channels { gap: 0; }
+  .search-channels button { font-size: 12px; padding: 10px 8px; }
+  .search-toolbar .row { justify-content: flex-start; }
+  .company-search-form { width: 100%; }
+  .mexico-scope { align-items: flex-start; }
+  .mexico-main .header { flex-wrap: wrap; }
+  .mexico-main .header .row { justify-content: flex-start; }
+  .mexico-main .toolbar .row { gap: 10px; }
+  .mexico-lead .supplier-title { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .lead-detail-name { font-size: 20px; }
+}

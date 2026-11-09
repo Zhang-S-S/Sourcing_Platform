@@ -1,0 +1,36 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "启动本地 MySQL",
+      "type": "shell",
+      "command": "node scripts/mysql.mjs start",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "/bin/zsh", "args": ["-lic"] } },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "启动寻源后端",
+      "type": "shell",
+      "command": "mvn spring-boot:run",
+      "dependsOn": ["启动本地 MySQL"],
+      "options": { "cwd": "${workspaceFolder}/backend", "shell": { "executable": "/bin/zsh", "args": ["-lic"] } },
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "sourcing" },
+      "problemMatcher": []
+    },
+    {
+      "label": "启动寻源前端",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "${workspaceFolder}/frontend", "shell": { "executable": "/bin/zsh", "args": ["-lic"] } },
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "sourcing" },
+      "problemMatcher": []
+    },
+    {
+      "label": "启动寻源平台（前后端）",
+      "dependsOn": ["启动寻源后端", "启动寻源前端"],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    }
+  ]
+}
