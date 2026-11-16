@@ -2,7 +2,7 @@
 // Writes are limited to a synthetic account in the local MySQL TEST database.
 import assert from 'node:assert/strict'
 if (process.env.SOURCING_ACCEPTANCE_TEST_DB !== '1') throw new Error('仅可对独立 MySQL 测试账号库执行；确认后设置 SOURCING_ACCEPTANCE_TEST_DB=1')
-const base = process.env.SOURCING_TEST_URL || 'http://127.0.0.1:8080'
+const base = process.env.SOURCING_TEST_URL || 'http://127.0.0.1:8082'
 let cookie = '', csrf
 async function api(path, body, expected = 200, method = body ? 'POST' : 'GET') {
   if (method !== 'GET' && !csrf) csrf = await api('/auth/csrf')
@@ -11,7 +11,7 @@ async function api(path, body, expected = 200, method = body ? 'POST' : 'GET') {
     headers: { Cookie: cookie, ...(body ? { 'Content-Type': 'application/json' } : {}), ...(method !== 'GET' && csrf ? { [csrf.headerName]: csrf.token } : {}) },
     ...(body ? { body: JSON.stringify(body) } : {}),
   })
-  for (const value of response.headers.getSetCookie()) if (value.startsWith('SOURCING_SESSION=')) cookie = value.split(';')[0]
+  for (const value of response.headers.getSetCookie()) if (value.startsWith('SOURCING_REACT_SESSION=')) cookie = value.split(';')[0]
   const raw = await response.text()
   assert.equal(response.status, expected, `${path}: ${raw}`)
   if (path.startsWith('/auth/login/') || path === '/auth/logout') csrf = null

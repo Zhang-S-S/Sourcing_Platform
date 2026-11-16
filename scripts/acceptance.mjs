@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict'
 
 const stage = process.argv[2] || 'seed'
-const base = process.env.SOURCING_TEST_URL || 'http://127.0.0.1:8080'
+const base = process.env.SOURCING_TEST_URL || 'http://127.0.0.1:8083'
 let cookie = ''
 let csrf
 
@@ -13,9 +13,9 @@ async function call(path, { body, method = body ? 'POST' : 'GET', expected = 200
     ...(body ? { body: JSON.stringify(body) } : {}),
   })
   for (const value of response.headers.getSetCookie()) {
-    if (value.startsWith('SOURCING_SESSION=')) {
+    if (value.startsWith('SOURCING_REACT_SESSION=')) {
       cookie = value.split(';')[0]
-      if (cookie !== 'SOURCING_SESSION=') assert.match(value, /HttpOnly/i)
+      if (cookie !== 'SOURCING_REACT_SESSION=') assert.match(value, /HttpOnly/i)
       assert.match(value, /SameSite=Lax/i)
     }
   }
@@ -57,4 +57,4 @@ csrf = await call('/csrf')
 await call('/logout', { method: 'POST', expected: 204 })
 console.log(stage === 'seed'
   ? 'PASS: HTTP registration, both logins, session cookie flags, CSRF rotation, logout and replay rejection.'
-  : 'PASS: After backend restart, persisted account can still log in by password and phone; old sessions are rejected.')
+  : 'PASS: Persisted account can log in by password and phone; logged-out sessions are rejected.')
