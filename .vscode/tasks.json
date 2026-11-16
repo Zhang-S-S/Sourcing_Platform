@@ -10,7 +10,7 @@
       "problemMatcher": []
     },
     {
-      "label": "启动寻源后端",
+      "label": "启动 React 寻源后端",
       "type": "shell",
       "command": "mvn spring-boot:run",
       "dependsOn": ["启动本地 MySQL"],
@@ -19,7 +19,7 @@
       "problemMatcher": []
     },
     {
-      "label": "启动寻源前端",
+      "label": "启动 React 寻源前端",
       "type": "shell",
       "command": "npm run dev",
       "options": { "cwd": "${workspaceFolder}/frontend", "shell": { "executable": "/bin/zsh", "args": ["-lic"] } },
@@ -27,8 +27,8 @@
       "problemMatcher": []
     },
     {
-      "label": "启动寻源平台（前后端）",
-      "dependsOn": ["启动寻源后端", "启动寻源前端"],
+      "label": "启动 React 寻源平台（前后端）",
+      "dependsOn": ["启动 React 寻源后端", "启动 React 寻源前端"],
       "dependsOrder": "parallel",
       "problemMatcher": []
     }

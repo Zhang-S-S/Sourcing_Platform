@@ -11,10 +11,11 @@ const html = fs.readFileSync(source, 'utf8')
 const css = html.match(/<style>([\s\S]*?)<\/style>/)[1]
 const original = html.match(/<script>\(\(\)=>\{([\s\S]*)\}\)\(\);\s*<\/script>/)[1]
 const illustration = html.match(/data:image\/png;base64,([A-Za-z0-9+/=]+)/)[1]
-fs.mkdirSync(path.join(project, 'frontend/src/prototype'), { recursive: true })
+fs.mkdirSync(path.join(project, 'frontend/src/styles'), { recursive: true })
+fs.mkdirSync(path.join(project, 'frontend/src/legacy'), { recursive: true })
 fs.mkdirSync(path.join(project, 'frontend/src/assets'), { recursive: true })
 fs.writeFileSync(path.join(project, 'frontend/src/assets/auth-illustration.png'), Buffer.from(illustration, 'base64'))
-fs.writeFileSync(path.join(project, 'frontend/src/prototype/design.css'), css + '\n')
+fs.writeFileSync(path.join(project, 'frontend/src/styles/design.css'), css + '\n')
 
 let script = original.split('\n').filter(line =>
   !/^function (auth|validOtp|loginAllowed|setModule)\(/.test(line) &&
@@ -46,7 +47,7 @@ script = script
   .replaceAll("document.addEventListener(", "listen(document,")
   .replaceAll("window.addEventListener(", "listen(window,")
 
-// All legacy listeners are scoped to this Vue component and removed on logout.
+// All legacy listeners are scoped to this React component and removed on logout.
 script = `export function mountWorkspace(root, user, onLogout, options = {}) {
 const events = new AbortController();
 const listen = (target, type, handler) => target.addEventListener(type, handler, { signal: events.signal });
@@ -63,5 +64,5 @@ return cleanup;
 }
 `
 if (/password:'demo8888'|function auth\(|function setModule\(|prototypePreview/.test(script)) throw new Error('Prototype auth was not removed')
-fs.writeFileSync(path.join(project, 'frontend/src/prototype/workspace.js'), script)
+fs.writeFileSync(path.join(project, 'frontend/src/legacy/workspace.js'), script)
 console.log('Imported original styling, illustration and static sourcing workspace; prototype authentication removed.')
